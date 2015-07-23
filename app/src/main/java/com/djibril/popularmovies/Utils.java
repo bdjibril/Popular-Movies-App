@@ -1,6 +1,8 @@
 package com.djibril.popularmovies;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -13,7 +15,6 @@ import java.util.Arrays;
 public class Utils {
 
     public static final String API_KEY = "YOUR_API_KEY";
-
     private static final String POSTER_NOT_FOUND_IMAGE = "https://d3a8mw37cqal2z.cloudfront.net/assets/f996aa2014d2ffddfda8463c479898a3/images/no-poster-w185.jpg";
     private static final String POSTER_BASE_PATH = "https://image.tmdb.org/t/p/w185/";
 
@@ -71,5 +72,14 @@ public class Utils {
         String[] movieInfoArray = movieInfo.movieDataSrting.split("\n");
         int position = Arrays.asList(MOVIE_INFO_FIELDS).indexOf(infoToExtract);
         return (movieInfoArray.length > position && !movieInfoArray[position].equals("null"))?movieInfoArray[position]:"";
+    }
+
+    // From instructor review (Modified to add the Context parameter and made it public)
+    //Based on a stackoverflow snippet
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

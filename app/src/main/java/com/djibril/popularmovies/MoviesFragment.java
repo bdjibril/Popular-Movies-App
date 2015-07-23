@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 
 /**
@@ -37,8 +38,7 @@ public class MoviesFragment extends Fragment {
             String sortBy = prefs.getString(this.getString(R.string.pref_sort_by_key),
                     this.getString(R.string.pref_sort_by_default));
 
-            FetchMoviesTask fetchMoviesTask = new FetchMoviesTask(getActivity(), mMoviesAdapter);
-            fetchMoviesTask.execute(sortBy);
+            fetchMovies(sortBy);
         }
         else {
             mMoviesAdapter.mData = savedInstanceState.getParcelableArrayList(MOVIES_PARCELABLE_KEY);
@@ -81,12 +81,29 @@ public class MoviesFragment extends Fragment {
 
     public void onSortChanged(String sortBy) {
 
-        Log.v("FRAG","SORT CHANGED");
+        Log.v("FRAG", "SORT CHANGED");
 
+        if(fetchMovies(sortBy)){
+            mMoviesAdapter.notifyDataSetChanged();
+            mGridView.smoothScrollToPosition(0);
+        }
+
+    }
+
+    private boolean fetchMovies(String sortBy) {
+
+        if(!Utils.isNetworkAvailable(getActivity())){
+            // show toast if no network
+            String text = "No Internet Connectivity";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(getActivity(),text, duration);
+            toast.show();
+            return false;
+        }
+
+        // Network is present
         FetchMoviesTask fetchMoviesTask = new FetchMoviesTask(getActivity(), mMoviesAdapter);
         fetchMoviesTask.execute(sortBy);
-        mMoviesAdapter.notifyDataSetChanged();
-        mGridView.smoothScrollToPosition(0);
-
+        return true;
     }
 }
