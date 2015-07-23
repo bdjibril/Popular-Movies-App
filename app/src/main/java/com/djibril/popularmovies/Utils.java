@@ -67,8 +67,8 @@ public class Utils {
         imageView.setLayoutParams(layoutParams);
     }
 
-    public static String extractValueFromMovieInfo(final String infoToExtract, final String movieInfo){
-        String[] movieInfoArray = movieInfo.split("\n");
+    public static String extractValueFromMovieInfo(final String infoToExtract, final Movie movieInfo){
+        String[] movieInfoArray = movieInfo.movieDataSrting.split("\n");
         int position = Arrays.asList(MOVIE_INFO_FIELDS).indexOf(infoToExtract);
         return (movieInfoArray.length > position && !movieInfoArray[position].equals("null"))?movieInfoArray[position]:"";
     }

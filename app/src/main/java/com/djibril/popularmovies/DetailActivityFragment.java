@@ -31,11 +31,13 @@ public class DetailActivityFragment extends Fragment {
         if(null != intent && intent.hasExtra(Intent.EXTRA_TEXT)){
             String stringExtra = intent.getStringExtra(Intent.EXTRA_TEXT);
 
-            String moviePostImageName = Utils.extractValueFromMovieInfo(Utils.MOVIE_POSTER_FIELD, stringExtra);
-            String movieTitle = Utils.extractValueFromMovieInfo(Utils.MOVIE_TITLE_FIELD, stringExtra);
-            String movieYear = Utils.extractValueFromMovieInfo(Utils.MOVIE_YEAR_FIELD, stringExtra).substring(0, 4);
-            String movieRating = Utils.extractValueFromMovieInfo(Utils.MOVIE_RATING_FIELD, stringExtra);
-            String movieDescription = Utils.extractValueFromMovieInfo(Utils.MOVIE_DESCRIPTTION_FIELD, stringExtra);
+            Movie movie = new Movie(stringExtra);
+
+            String moviePostImageName = Utils.extractValueFromMovieInfo(Utils.MOVIE_POSTER_FIELD, movie);
+            String movieTitle = Utils.extractValueFromMovieInfo(Utils.MOVIE_TITLE_FIELD, movie);
+            String movieYear = Utils.extractValueFromMovieInfo(Utils.MOVIE_YEAR_FIELD, movie).substring(0, 4);
+            String movieRating = Utils.extractValueFromMovieInfo(Utils.MOVIE_RATING_FIELD, movie);
+            String movieDescription = Utils.extractValueFromMovieInfo(Utils.MOVIE_DESCRIPTTION_FIELD, movie);
 
             String src = Utils.buildPosterImageUrl(moviePostImageName);
 

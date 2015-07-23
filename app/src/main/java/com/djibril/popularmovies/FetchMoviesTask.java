@@ -15,28 +15,27 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by bah on 7/19/15.
  */
-public class FetchMoviesTask extends AsyncTask <String, Void, String[]> {
+public class FetchMoviesTask extends AsyncTask <String, Void, ArrayList<Movie>> {
 
     Context mContext;
-    MoviesAdapter mMooviesAdapter;
+    MoviesAdapter mMoviesAdapter;
 
     private final String LOG_TAG = FetchMoviesTask.class.getSimpleName();
 
 
     FetchMoviesTask(Context context, MoviesAdapter adapter){
         mContext = context;
-        mMooviesAdapter = adapter;
+        mMoviesAdapter = adapter;
     }
 
     @Override
-    protected String[] doInBackground(String... params) {
+    protected ArrayList<Movie> doInBackground(String... params) {
 
-
-        // URL http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key={API_KEY}
         String sortBy = "vote_average.desc";
 
         // If there's no sortby param
@@ -126,7 +125,7 @@ public class FetchMoviesTask extends AsyncTask <String, Void, String[]> {
         return null;
     }
 
-    private String[] getMoviesDataFromJson(String moviesJsonStr)
+    private ArrayList<Movie> getMoviesDataFromJson(String moviesJsonStr)
             throws JSONException {
 
         // These are the names of the JSON objects that need to be extracted.
@@ -142,7 +141,7 @@ public class FetchMoviesTask extends AsyncTask <String, Void, String[]> {
         JSONObject moviesJson = new JSONObject(moviesJsonStr);
         JSONArray movieArray = moviesJson.getJSONArray(ROOT_MOVIES_LIST);
 
-        String[] resultStrs = new String[movieArray.length()];
+        ArrayList<Movie> resultMovies = new ArrayList<Movie>(movieArray.length());
         for(int i = 0; i < movieArray.length(); i++) {
             String imageLink;
             String originalTitle;
@@ -160,29 +159,29 @@ public class FetchMoviesTask extends AsyncTask <String, Void, String[]> {
             userRating = movieObject.getString(USER_RATING);
             plotSynopsis = movieObject.getString(PLOT_SYNOPSIS);
 
-            resultStrs[i] = imageLink + "\n" +
+            resultMovies.add(new Movie(imageLink + "\n" +
                             originalTitle + "\n" +
                             releaseDate + "\n" +
                             userRating + "\n" +
-                            plotSynopsis
+                            plotSynopsis))
             ;
 
         }
 
-        for (String s : resultStrs) {
+        for (Movie s : resultMovies) {
             Log.v(LOG_TAG, "Movie Poster: " + s);
         }
-        return resultStrs;
+        return resultMovies;
 
     }
 
     @Override
-    protected void onPostExecute(String[] result) {
+    protected void onPostExecute(ArrayList<Movie> result) {
 
         Log.v(LOG_TAG, "TASK POST EXECUTE");
 
-        mMooviesAdapter.mData = result;
-        mMooviesAdapter.notifyDataSetChanged();
+        mMoviesAdapter.mData = result;
+        mMoviesAdapter.notifyDataSetChanged();
 
     }
 }
