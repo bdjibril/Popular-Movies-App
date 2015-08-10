@@ -6,4 +6,11 @@
     <string name="pref_sort_by_label">Sort By</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_detail">Movie Detail</string>
+    <string name="content_authority">com.djibril.popularmovies</string>
+    <string name="most_popular">Most Popular</string>
+    <string name="highest_rated">Hisghest Rated</string>
+    <string name="most_popular_value">popularity.desc</string>
+    <string name="highest_rated_value">vote_average.desc</string>
+    <string name="mark_favorite">Mark as Favorite</string>
+    <string name="unmark_favorite">Remove Favorite</string>
 </resources>

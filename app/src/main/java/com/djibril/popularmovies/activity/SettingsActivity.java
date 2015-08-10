@@ -1,4 +1,4 @@
-package com.djibril.popularmovies;
+package com.djibril.popularmovies.activity;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+
+import com.djibril.popularmovies.R;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings.

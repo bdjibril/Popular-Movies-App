@@ -1,25 +1,36 @@
-package com.djibril.popularmovies;
+package com.djibril.popularmovies.activity;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.djibril.popularmovies.R;
 
-public class DetailActivity extends ActionBarActivity {
+
+public class DetailActivity extends AppCompatActivity {
+
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        // Set the mToolbar
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+
+        // Style the mToolbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_detail, menu);
+        //getMenuInflater().inflate(R.menu.menu_detail, menu);
         return true;
     }
 
@@ -32,8 +43,8 @@ public class DetailActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent setttingsIntent = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(setttingsIntent);
+            //Intent settingsIntent = new Intent(getApplicationContext(), SettingsActivity.class);
+            //startActivity(settingsIntent);
             return true;
         }
 

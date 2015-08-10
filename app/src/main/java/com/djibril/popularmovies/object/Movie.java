@@ -1,4 +1,4 @@
-package com.djibril.popularmovies;
+package com.djibril.popularmovies.object;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -11,14 +11,14 @@ import java.lang.String;
  */
 public class Movie implements Parcelable {
 
-    String movieDataSrting;
+    public String dataString;
 
     public Movie(String data) {
-        movieDataSrting = data;
+        dataString = data;
     }
 
     private Movie(Parcel in) {
-        movieDataSrting = in.readString();
+        dataString = in.readString();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(movieDataSrting);
+        parcel.writeString(dataString);
     }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {

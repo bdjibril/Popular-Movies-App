@@ -2,46 +2,39 @@
 <items version="2" >
 
     <item
-        jar="/Users/bah/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jar="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-93f47347507ab92896a3eb88d3079c05b424b192.jar" />
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/classes-a8b9037e7791460dbee11c923487b46202bcd7d9.jar" />
     </item>
     <item
-        jar="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/jars/libs/internal_impl-21.0.2.jar"
+        jar="/Users/bah/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.5.2/ecf534dba3a8446ce84cbb797d314763be212a68/glide-3.5.2.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
-        <dex dex="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-d6fa1eefc3d65709d7e47437245ba7d2a3343870.jar" />
+        sha1="ecf534dba3a8446ce84cbb797d314763be212a68">
+        <dex dex="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/glide-3.5.2-e3ac2eb01d00c0d0d1cd0d982b29ef2c74c492db.jar" />
     </item>
     <item
-        jar="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/jars/classes.jar"
+        jar="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3">
-        <dex dex="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/classes-5becc10e475dedde80aab218ec2de2e3c12384d5.jar" />
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/classes-89f5cdb92536d90332a5e9886e87caed45e32edd.jar" />
     </item>
     <item
-        jar="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/jars/classes.jar"
+        jar="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="7ae2d38807a43b2f2185ff4089a92c790b579e54">
-        <dex dex="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/classes-d6bab0bf33af2582cef72cfda7a8814c2caf3062.jar" />
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-730105fe96bb899d3f8822b51c7adea6f65f58d8.jar" />
     </item>
     <item
-        jar="/Users/bah/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-93f47347507ab92896a3eb88d3079c05b424b192.jar" />
-    </item>
-    <item
-        jar="/Users/bah/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.2/support-annotations-21.0.2.jar"
+        jar="/Users/bah/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
-        <dex dex="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-628c1ca81af7214dd554afcc1619eb560e7a3506.jar" />
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/Users/bah/AndroidStudioProjects/PopularMovies/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-859efa6afe483e91a2fabcae33b369c6725505d5.jar" />
     </item>
 
 </items>

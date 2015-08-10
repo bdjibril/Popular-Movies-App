@@ -3,10 +3,11 @@
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/grid_view_movies"
+    style="@style/MovieListStyle"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:focusableInTouchMode="false"
     android:gravity="fill_horizontal"
     android:numColumns="@integer/grid_num_rows"
-    tools:context="com.djibril.popularmovies.MoviesFragment" />
+    tools:context="com.djibril.popularmovies.fragment.MoviesFragment" />
 

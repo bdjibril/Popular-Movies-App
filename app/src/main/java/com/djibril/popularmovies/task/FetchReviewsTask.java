@@ -1,9 +1,13 @@
-package com.djibril.popularmovies;
+package com.djibril.popularmovies.task;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.djibril.popularmovies.Utils;
+import com.djibril.popularmovies.adapter.ReviewAdapter;
+import com.djibril.popularmovies.object.Review;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,28 +24,30 @@ import java.util.ArrayList;
 /**
  * Created by bah on 7/19/15.
  */
-public class FetchMoviesTask extends AsyncTask <String, Void, ArrayList<Movie>> {
+public class FetchReviewsTask extends AsyncTask <String, Void, ArrayList<Review>> {
 
     Context mContext;
-    MoviesAdapter mMoviesAdapter;
+    ReviewAdapter mReviewsAdapter;
 
-    private final String LOG_TAG = FetchMoviesTask.class.getSimpleName();
+    private final String LOG_TAG = FetchReviewsTask.class.getSimpleName();
 
 
-    FetchMoviesTask(Context context, MoviesAdapter adapter){
+    public FetchReviewsTask(Context context, ReviewAdapter adapter){
         mContext = context;
-        mMoviesAdapter = adapter;
+        mReviewsAdapter = adapter;
     }
 
     @Override
-    protected ArrayList<Movie> doInBackground(String... params) {
+    protected ArrayList<Review> doInBackground(String... params) {
 
-        String sortBy = "vote_average.desc";
+        String movieId;
 
         // If there's no sortby param
-        if (params.length != 0) {
-            sortBy = params[0];
+        if (params.length == 0) {
+            return null;
         }
+
+        movieId = params[0];
 
         // These two need to be declared outside the try/catch
         // so that they can be closed in the finally block.
@@ -49,17 +55,20 @@ public class FetchMoviesTask extends AsyncTask <String, Void, ArrayList<Movie>> 
         BufferedReader reader = null;
 
         // Will contain the raw JSON response as a string.
-        String moviesJsonStr = null;
+        String trailersJsonStr = null;
 
         try {
             // Construct the URL for the API
-            final String MOVIES_BASE_URL =
-                    "http://api.themoviedb.org/3/discover/movie?";
-            final String SORT_PARAM = "sort_by";
+            final String MOVIE_BASE_URL =
+                    "http://api.themoviedb.org/3/movie/";
+
             final String API_KEY_PARAM = "api_key";
 
-            Uri builtUri = Uri.parse(MOVIES_BASE_URL).buildUpon()
-                    .appendQueryParameter(SORT_PARAM, sortBy)
+            final String REVIEWS_PATH = "reviews";
+
+            Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
+                    .appendPath(movieId)
+                    .appendPath(REVIEWS_PATH)
                     .appendQueryParameter(API_KEY_PARAM, Utils.API_KEY)
                     .build();
 
@@ -93,9 +102,9 @@ public class FetchMoviesTask extends AsyncTask <String, Void, ArrayList<Movie>> 
                 // Stream was empty.  No point in parsing.
                 return null;
             }
-            moviesJsonStr = buffer.toString();
+            trailersJsonStr = buffer.toString();
 
-            Log.v(LOG_TAG, "Movies string: " + moviesJsonStr);
+            Log.v(LOG_TAG, "Reviews string: " + trailersJsonStr);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
             // If the code didn't successfully get the movies data, there's no point in attemping
@@ -115,73 +124,58 @@ public class FetchMoviesTask extends AsyncTask <String, Void, ArrayList<Movie>> 
         }
 
         try {
-            return getMoviesDataFromJson(moviesJsonStr);
+            return getReviewsDataFromJson(trailersJsonStr);
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
         }
 
-        // This will only happen if there was an error getting or parsing the movie.
+        // This will only happen if there was an error getting or parsing the trailers Data.
         return null;
     }
 
-    private ArrayList<Movie> getMoviesDataFromJson(String moviesJsonStr)
+    private ArrayList<Review> getReviewsDataFromJson(String reviewsJsonStr)
             throws JSONException {
 
         // These are the names of the JSON objects that need to be extracted.
-        final String ROOT_MOVIES_LIST = "results";
+        final String ROOT_REVIEWS_LIST = "results";
 
         // Define json paths
-        final String MOVIE_POSTER = "poster_path";
-        final String ORIGINAL_TITLE = "original_title";
-        final String PLOT_SYNOPSIS = "overview";
-        final String USER_RATING = "vote_average";
-        final String RELEASE_DATE = "release_date";
+        final String REVIEW_AUTHOR = "author";
+        final String REVIEW_CONTENT = "content";
 
-        JSONObject moviesJson = new JSONObject(moviesJsonStr);
-        JSONArray movieArray = moviesJson.getJSONArray(ROOT_MOVIES_LIST);
+        JSONObject reviewJson = new JSONObject(reviewsJsonStr);
+        JSONArray reviewArray = reviewJson.getJSONArray(ROOT_REVIEWS_LIST);
 
-        ArrayList<Movie> resultMovies = new ArrayList<Movie>(movieArray.length());
-        for(int i = 0; i < movieArray.length(); i++) {
-            String imageLink;
-            String originalTitle;
-            String releaseDate;
-            String duration;
-            String userRating;
-            String plotSynopsis;
+        ArrayList<Review> reviews = new ArrayList<Review>(reviewArray.length());
+        for(int i = 0; i < reviewArray.length(); i++) {
+            String author;
+            String content;
 
             // Get the JSON object representing the movie
-            JSONObject movieObject = movieArray.getJSONObject(i);
+            JSONObject trailerObject = reviewArray.getJSONObject(i);
 
-            imageLink = movieObject.getString(MOVIE_POSTER);
-            originalTitle = movieObject.getString(ORIGINAL_TITLE);
-            releaseDate = movieObject.getString(RELEASE_DATE);
-            userRating = movieObject.getString(USER_RATING);
-            plotSynopsis = movieObject.getString(PLOT_SYNOPSIS);
+            author = trailerObject.getString(REVIEW_AUTHOR);
+            content = trailerObject.getString(REVIEW_CONTENT);
 
-            resultMovies.add(new Movie(imageLink + "\n" +
-                            originalTitle + "\n" +
-                            releaseDate + "\n" +
-                            userRating + "\n" +
-                            plotSynopsis))
-            ;
-
+            reviews.add(new Review(author, content));
         }
 
-        for (Movie s : resultMovies) {
-            Log.v(LOG_TAG, "Movie Poster: " + s);
+        for (Review review : reviews) {
+            Log.v(LOG_TAG, "Review author: " + review.mAuthor);
+            Log.v(LOG_TAG, "Review content: " + review.mContent);
         }
-        return resultMovies;
+        return reviews;
 
     }
 
     @Override
-    protected void onPostExecute(ArrayList<Movie> result) {
+    protected void onPostExecute(ArrayList<Review> result) {
 
         Log.v(LOG_TAG, "TASK POST EXECUTE");
 
-        mMoviesAdapter.mData = result;
-        mMoviesAdapter.notifyDataSetChanged();
+        mReviewsAdapter.mData = result;
+        mReviewsAdapter.notifyDataSetChanged();
 
     }
 }

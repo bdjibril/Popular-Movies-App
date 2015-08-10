@@ -1,4 +1,4 @@
-package com.djibril.popularmovies;
+package com.djibril.popularmovies.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -6,7 +6,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
+
+import com.bumptech.glide.Glide;
+import com.djibril.popularmovies.object.Movie;
+import com.djibril.popularmovies.Utils;
 
 import java.util.ArrayList;
 
@@ -17,10 +20,10 @@ import java.util.ArrayList;
  */
 public class MoviesAdapter extends BaseAdapter {
 
-    Context mContext;
-    ArrayList <Movie> mData;
+    public Context mContext;
+    public ArrayList <Movie> mData;
 
-    MoviesAdapter(Context c, ArrayList<Movie> d){
+    public MoviesAdapter(Context c, ArrayList<Movie> d){
         mContext = c;
         mData = d;
     }
@@ -49,7 +52,7 @@ public class MoviesAdapter extends BaseAdapter {
         if (convertView == null) {
             // if it's not recycled, create and set the attributes
             imageItemView = new ImageView(mContext);
-            Utils.setPosterImageSizeParams(mContext,imageItemView);
+            Utils.setPosterImageSizeParams(mContext, imageItemView);
         } else {
             // this image should have the properties already set
             imageItemView = (ImageView) convertView;
@@ -57,7 +60,7 @@ public class MoviesAdapter extends BaseAdapter {
 
          // set the image url
         String imageName = Utils.extractValueFromMovieInfo(Utils.MOVIE_POSTER_FIELD,mData.get(position));
-        Picasso.with(mContext).load(Utils.buildPosterImageUrl(imageName)).into(imageItemView);
+        Glide.with(mContext).load(Utils.buildPosterImageUrl(imageName)).into(imageItemView);
 
         return imageItemView;
     }
